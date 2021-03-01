@@ -30,29 +30,51 @@ namespace O_Natashao
         // this is the 2D array
         int[,] checkerBoard = new int[8, 8];
 
-        // this creates an infinate board to test
-        private int[,] infinateBoard()
+        //// this creates an infinate board to test
+        //private int[,] infinateBoard()
+        //{
+        //    for (int row = 0; row <= 7; row++)
+        //    {
+        //        for (int col = 0; col <= 7; col++)
+        //        {
+        //            if ((col == 0) && (row == 0))
+        //                checkerBoard[row, col] = 0;
+        //            else
+        //                if (col > 0)
+        //                    if (checkerBoard[row, col - 1] == 1)
+        //                        checkerBoard[row, col] = 0;
+        //                    else
+        //                        checkerBoard[row, col] = 1;
+        //            if (row > 0)
+        //                if (checkerBoard[row - 1, col] == 1)
+        //                    checkerBoard[row, col] = 0;
+        //                else
+        //                    checkerBoard[row, col] = 1;
+        //        }
+        //    }
+        //    return checkerBoard;
+        //}
+
+        private int[,] startingBoard()
         {
             for (int row = 0; row <= 7; row++)
             {
                 for (int col = 0; col <= 7; col++)
                 {
-                    if ((col == 0) && (row == 0))
+                    if (((row == x) && (col == x)) || ((row == x) && (col == x)))
+                    {
+                        checkerBoard[row, col] = 1;
+                    }
+                    else if (((row == x) && (col == x)) || ((row == x) && (col == x)))
+                    {
                         checkerBoard[row, col] = 0;
+                    }
                     else
-                        if (col > 0)
-                            if (checkerBoard[row, col - 1] == 1)
-                                checkerBoard[row, col] = 0;
-                            else
-                                checkerBoard[row, col] = 1;
-                    if (row > 0)
-                        if (checkerBoard[row - 1, col] == 1)
-                            checkerBoard[row, col] = 0;
-                        else
-                            checkerBoard[row, col] = 1;
+                    {
+                        checkerBoard[row, col] = 10;
+                    }
                 }
             }
-            return checkerBoard;
         }
 
         private void Which_Element_Clicked(object sender, EventArgs e)
