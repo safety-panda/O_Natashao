@@ -142,10 +142,16 @@ namespace O_Natashao
 
         }
 
-        private void Which_Element_Clicked(object sender, EventArgs e)
+        private bool availableSpace(int row, int col)
         {
-            int row = GCheckerBoard.Get_Row(sender);
-            int col = GCheckerBoard.Get_Row(sender);
+            if (checkerBoard[row, col] == 10)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
         }
 
         private void showGUI()
@@ -160,6 +166,25 @@ namespace O_Natashao
             GCheckerBoard = new GImageArray(this, checkerBoard, 50, 50, 100, 50, 0, path);
             GCheckerBoard.Which_Element_Clicked += new GImageArray.ImageClickedEventHandler(Which_Element_Clicked);
         }
+
+        private void Which_Element_Clicked(object sender, EventArgs e)
+        {
+            int row = GCheckerBoard.Get_Row(sender);
+            int col = GCheckerBoard.Get_Col(sender);
+            bool legalMove;
+
+            legalMove = availableSpace(row, col);
+
+            if (legalMove == false)
+            {
+                MessageBox.Show("Nope - not there");
+            }
+            else if (legalMove == true)
+            {
+                // badger 
+            }
+        }
+
 
         // this button outputs the array values into a text box
         private void button1_Click(object sender, EventArgs e)
