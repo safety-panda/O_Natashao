@@ -19,14 +19,18 @@ namespace O_Natashao
         public Form1()
         {
             InitializeComponent();
+
+            // this shows the GUI board when the form opens
             showGUI();
         }
 
+        // here we create the checker board object
         GImageArray GCheckerBoard;
 
+        // this is the 2D array
         int[,] checkerBoard = new int[8, 8];
 
-
+        // this creates an infinate board to test
         private int[,] infinateBoard()
         {
             for (int row = 0; row <= 7; row++)
@@ -51,15 +55,24 @@ namespace O_Natashao
             return checkerBoard;
         }
 
+        private void Which_Element_Clicked(object sender, EventArgs e)
+        {
+            int row = GCheckerBoard.Get_Row(sender);
+            int col = GCheckerBoard.Get_Row(sender);
+        }
+
         private void showGUI()
         {
             string path = Directory.GetCurrentDirectory() + "\\images\\";
+
+
             infinateBoard();
 
-            GCheckerBoard = new GImageArray(this, checkerBoard, 50, 50, 50, 50, 0, path);
+            GCheckerBoard = new GImageArray(this, checkerBoard, 50, 50, 100, 50, 0, path);
+            GCheckerBoard.Which_Element_Clicked += new GImageArray.ImageClickedEventHandler(Which_Element_Clicked);
         }
 
-
+        // this button outputs the array values into a text box
         private void button1_Click(object sender, EventArgs e)
         {
             infinateBoard();
