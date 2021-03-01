@@ -20,6 +20,8 @@ namespace O_Natashao
         {
             InitializeComponent();
 
+            newGame();
+
             // this shows the GUI board when the form opens
             showGUI();
         }
@@ -30,6 +32,33 @@ namespace O_Natashao
         // this is the 2D array
         int[,] checkerBoard = new int[8, 8];
 
+        // sets up players 
+        // p1 | TRUE | white
+        // p2 | FALSE | black
+        bool currentPlayer;
+
+        private bool currentPlayerSettings(int player)
+        {
+            if (player == 1)
+            {
+                currentPlayer = true;
+                p1ToPlayImage.Visible = true;
+                p2ToPlayImage.Visible = false;
+            }
+            else if (player == 0)
+            {
+                currentPlayer = false;
+                p1ToPlayImage.Visible = false;
+                p2ToPlayImage.Visible = true;
+            }
+            return currentPlayer;
+        }
+
+        private void newGame()
+        {
+            startingBoard();
+            currentPlayerSettings(1);
+        }
 
         // this creates an infinate board to test
         private int[,] infinateBoard()
@@ -123,8 +152,9 @@ namespace O_Natashao
         {
             string path = Directory.GetCurrentDirectory() + "\\images\\";
 
-            startingBoard();
+
             //infinateBoard();
+
             scoreCounter();
 
             GCheckerBoard = new GImageArray(this, checkerBoard, 50, 50, 100, 50, 0, path);
@@ -156,6 +186,11 @@ namespace O_Natashao
                     }
                 }
             }
+        }
+
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            newGame();
         }
     }
 }

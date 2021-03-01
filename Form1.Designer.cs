@@ -46,6 +46,8 @@ namespace O_Natashao
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.speakToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.p1ToPlayImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p2CounterImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1CounterImage)).BeginInit();
@@ -142,6 +144,7 @@ namespace O_Natashao
             this.p1ToPlayImage.Size = new System.Drawing.Size(141, 34);
             this.p1ToPlayImage.TabIndex = 12;
             this.p1ToPlayImage.TabStop = false;
+            this.p1ToPlayImage.Visible = false;
             // 
             // p2CounterImage
             // 
@@ -184,15 +187,20 @@ namespace O_Natashao
             this.p2ToPlayImage.Size = new System.Drawing.Size(141, 34);
             this.p2ToPlayImage.TabIndex = 13;
             this.p2ToPlayImage.TabStop = false;
+            this.p2ToPlayImage.Visible = false;
             // 
             // gameToolStripMenuItem
             // 
+            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newGameToolStripMenuItem});
             this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
             this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.gameToolStripMenuItem.Text = "Game";
             // 
             // settingsToolStripMenuItem
             // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.speakToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -214,6 +222,19 @@ namespace O_Natashao
             this.menuStrip1.Size = new System.Drawing.Size(662, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // speakToolStripMenuItem
+            // 
+            this.speakToolStripMenuItem.Name = "speakToolStripMenuItem";
+            this.speakToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.speakToolStripMenuItem.Text = "Speak";
+            // 
+            // newGameToolStripMenuItem
+            // 
+            this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newGameToolStripMenuItem.Text = "New Game";
+            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -270,6 +291,8 @@ namespace O_Natashao
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem speakToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
     }
 }
 
