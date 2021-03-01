@@ -30,30 +30,31 @@ namespace O_Natashao
         // this is the 2D array
         int[,] checkerBoard = new int[8, 8];
 
-        //// this creates an infinate board to test
-        //private int[,] infinateBoard()
-        //{
-        //    for (int row = 0; row <= 7; row++)
-        //    {
-        //        for (int col = 0; col <= 7; col++)
-        //        {
-        //            if ((col == 0) && (row == 0))
-        //                checkerBoard[row, col] = 0;
-        //            else
-        //                if (col > 0)
-        //                    if (checkerBoard[row, col - 1] == 1)
-        //                        checkerBoard[row, col] = 0;
-        //                    else
-        //                        checkerBoard[row, col] = 1;
-        //            if (row > 0)
-        //                if (checkerBoard[row - 1, col] == 1)
-        //                    checkerBoard[row, col] = 0;
-        //                else
-        //                    checkerBoard[row, col] = 1;
-        //        }
-        //    }
-        //    return checkerBoard;
-        //}
+
+        // this creates an infinate board to test
+        private int[,] infinateBoard()
+        {
+            for (int row = 0; row <= 7; row++)
+            {
+                for (int col = 0; col <= 7; col++)
+                {
+                    if ((col == 0) && (row == 0))
+                        checkerBoard[row, col] = 0;
+                    else
+                        if (col > 0)
+                            if (checkerBoard[row, col - 1] == 1)
+                                checkerBoard[row, col] = 0;
+                            else
+                                checkerBoard[row, col] = 1;
+                    if (row > 0)
+                        if (checkerBoard[row - 1, col] == 1)
+                            checkerBoard[row, col] = 0;
+                        else
+                            checkerBoard[row, col] = 1;
+                }
+            }
+            return checkerBoard;
+        }
 
         private int[,] startingBoard()
         {
@@ -83,6 +84,35 @@ namespace O_Natashao
             return checkerBoard;
         }
 
+        private void scoreCounter()
+        {
+            // sets the values to zero before counting
+            int p1Tokens = 0, p2Tokens = 0, emptySquares = 0;
+
+            for (int row = 0; row <= 7; row++)
+            {
+                for (int col = 0; col <= 7; col++)
+                {
+                    if (checkerBoard[row, col] == 1)
+                    {
+                        p1Tokens++;
+                    }
+                    else if (checkerBoard[row, col] == 0)
+                    {
+                        p2Tokens++;
+                    }
+                    else
+                    {
+                        emptySquares++;
+                    }
+                }
+            }
+
+            p1CountersLabel.Text = p1Tokens.ToString();
+            p2CountersLabel.Text = p2Tokens.ToString();
+
+        }
+
         private void Which_Element_Clicked(object sender, EventArgs e)
         {
             int row = GCheckerBoard.Get_Row(sender);
@@ -94,6 +124,8 @@ namespace O_Natashao
             string path = Directory.GetCurrentDirectory() + "\\images\\";
 
             startingBoard();
+            //infinateBoard();
+            scoreCounter();
 
             GCheckerBoard = new GImageArray(this, checkerBoard, 50, 50, 100, 50, 0, path);
             GCheckerBoard.Which_Element_Clicked += new GImageArray.ImageClickedEventHandler(Which_Element_Clicked);

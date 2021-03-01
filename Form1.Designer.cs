@@ -34,9 +34,9 @@ namespace O_Natashao
             this.p1NameBox = new System.Windows.Forms.TextBox();
             this.p2NameBox = new System.Windows.Forms.TextBox();
             this.p1XLabel = new System.Windows.Forms.Label();
-            this.p1CountersRemaingLabel = new System.Windows.Forms.Label();
+            this.p1CountersLabel = new System.Windows.Forms.Label();
             this.p2XLabel = new System.Windows.Forms.Label();
-            this.p2CountersRemaingLabel = new System.Windows.Forms.Label();
+            this.p2CountersLabel = new System.Windows.Forms.Label();
             this.p1ToPlayImage = new System.Windows.Forms.PictureBox();
             this.p2CounterImage = new System.Windows.Forms.PictureBox();
             this.p1CounterImage = new System.Windows.Forms.PictureBox();
@@ -102,15 +102,15 @@ namespace O_Natashao
             this.p1XLabel.TabIndex = 7;
             this.p1XLabel.Text = "x";
             // 
-            // p1CountersRemaingLabel
+            // p1CountersLabel
             // 
-            this.p1CountersRemaingLabel.BackColor = System.Drawing.Color.RosyBrown;
-            this.p1CountersRemaingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.p1CountersRemaingLabel.Location = new System.Drawing.Point(28, 593);
-            this.p1CountersRemaingLabel.Name = "p1CountersRemaingLabel";
-            this.p1CountersRemaingLabel.Size = new System.Drawing.Size(41, 31);
-            this.p1CountersRemaingLabel.TabIndex = 8;
-            this.p1CountersRemaingLabel.Text = "2";
+            this.p1CountersLabel.BackColor = System.Drawing.Color.RosyBrown;
+            this.p1CountersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.p1CountersLabel.Location = new System.Drawing.Point(28, 593);
+            this.p1CountersLabel.Name = "p1CountersLabel";
+            this.p1CountersLabel.Size = new System.Drawing.Size(41, 31);
+            this.p1CountersLabel.TabIndex = 8;
+            this.p1CountersLabel.Text = "2";
             // 
             // p2XLabel
             // 
@@ -122,15 +122,15 @@ namespace O_Natashao
             this.p2XLabel.TabIndex = 9;
             this.p2XLabel.Text = "x";
             // 
-            // p2CountersRemaingLabel
+            // p2CountersLabel
             // 
-            this.p2CountersRemaingLabel.BackColor = System.Drawing.Color.RosyBrown;
-            this.p2CountersRemaingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.p2CountersRemaingLabel.Location = new System.Drawing.Point(331, 593);
-            this.p2CountersRemaingLabel.Name = "p2CountersRemaingLabel";
-            this.p2CountersRemaingLabel.Size = new System.Drawing.Size(41, 31);
-            this.p2CountersRemaingLabel.TabIndex = 10;
-            this.p2CountersRemaingLabel.Text = "2";
+            this.p2CountersLabel.BackColor = System.Drawing.Color.RosyBrown;
+            this.p2CountersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.p2CountersLabel.Location = new System.Drawing.Point(331, 593);
+            this.p2CountersLabel.Name = "p2CountersLabel";
+            this.p2CountersLabel.Size = new System.Drawing.Size(41, 31);
+            this.p2CountersLabel.TabIndex = 10;
+            this.p2CountersLabel.Text = "2";
             // 
             // p1ToPlayImage
             // 
@@ -223,9 +223,9 @@ namespace O_Natashao
             this.ClientSize = new System.Drawing.Size(662, 647);
             this.Controls.Add(this.p2ToPlayImage);
             this.Controls.Add(this.p1ToPlayImage);
-            this.Controls.Add(this.p2CountersRemaingLabel);
+            this.Controls.Add(this.p2CountersLabel);
             this.Controls.Add(this.p2XLabel);
-            this.Controls.Add(this.p1CountersRemaingLabel);
+            this.Controls.Add(this.p1CountersLabel);
             this.Controls.Add(this.p1XLabel);
             this.Controls.Add(this.p2CounterImage);
             this.Controls.Add(this.p1CounterImage);
@@ -261,9 +261,9 @@ namespace O_Natashao
         private System.Windows.Forms.PictureBox p1CounterImage;
         private System.Windows.Forms.PictureBox p2CounterImage;
         private System.Windows.Forms.Label p1XLabel;
-        private System.Windows.Forms.Label p1CountersRemaingLabel;
+        private System.Windows.Forms.Label p1CountersLabel;
         private System.Windows.Forms.Label p2XLabel;
-        private System.Windows.Forms.Label p2CountersRemaingLabel;
+        private System.Windows.Forms.Label p2CountersLabel;
         private System.Windows.Forms.PictureBox p1ToPlayImage;
         private System.Windows.Forms.PictureBox p2ToPlayImage;
         private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
