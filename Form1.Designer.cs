@@ -33,9 +33,6 @@ namespace O_Natashao
             this.button1 = new System.Windows.Forms.Button();
             this.p1NameBox = new System.Windows.Forms.TextBox();
             this.p2NameBox = new System.Windows.Forms.TextBox();
-            this.p2CounterImage = new System.Windows.Forms.PictureBox();
-            this.p1CounterImage = new System.Windows.Forms.PictureBox();
-            this.playersInfoBox = new System.Windows.Forms.PictureBox();
             this.p1XLabel = new System.Windows.Forms.Label();
             this.p1CountersRemaingLabel = new System.Windows.Forms.Label();
             this.p2XLabel = new System.Windows.Forms.Label();
@@ -44,10 +41,17 @@ namespace O_Natashao
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.p1ToPlayImage = new System.Windows.Forms.PictureBox();
+            this.p2CounterImage = new System.Windows.Forms.PictureBox();
+            this.p1CounterImage = new System.Windows.Forms.PictureBox();
+            this.playersInfoBox = new System.Windows.Forms.PictureBox();
+            this.p2ToPlayImage = new System.Windows.Forms.PictureBox();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.p1ToPlayImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p2CounterImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1CounterImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.playersInfoBox)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.p2ToPlayImage)).BeginInit();
             this.SuspendLayout();
             // 
             // checkerBoardText
@@ -83,37 +87,6 @@ namespace O_Natashao
             this.p2NameBox.Name = "p2NameBox";
             this.p2NameBox.Size = new System.Drawing.Size(142, 20);
             this.p2NameBox.TabIndex = 4;
-            // 
-            // p2CounterImage
-            // 
-            this.p2CounterImage.BackColor = System.Drawing.Color.Transparent;
-            this.p2CounterImage.BackgroundImage = global::O_Natashao.Properties.Resources._0;
-            this.p2CounterImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.p2CounterImage.Location = new System.Drawing.Point(408, 590);
-            this.p2CounterImage.Name = "p2CounterImage";
-            this.p2CounterImage.Size = new System.Drawing.Size(32, 31);
-            this.p2CounterImage.TabIndex = 6;
-            this.p2CounterImage.TabStop = false;
-            // 
-            // p1CounterImage
-            // 
-            this.p1CounterImage.BackColor = System.Drawing.Color.Transparent;
-            this.p1CounterImage.BackgroundImage = global::O_Natashao.Properties.Resources._1;
-            this.p1CounterImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.p1CounterImage.Location = new System.Drawing.Point(89, 590);
-            this.p1CounterImage.Name = "p1CounterImage";
-            this.p1CounterImage.Size = new System.Drawing.Size(31, 31);
-            this.p1CounterImage.TabIndex = 5;
-            this.p1CounterImage.TabStop = false;
-            // 
-            // playersInfoBox
-            // 
-            this.playersInfoBox.BackColor = System.Drawing.Color.RosyBrown;
-            this.playersInfoBox.Location = new System.Drawing.Point(18, 561);
-            this.playersInfoBox.Name = "playersInfoBox";
-            this.playersInfoBox.Size = new System.Drawing.Size(632, 74);
-            this.playersInfoBox.TabIndex = 2;
-            this.playersInfoBox.TabStop = false;
             // 
             // p1XLabel
             // 
@@ -185,12 +158,67 @@ namespace O_Natashao
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // p1ToPlayImage
+            // 
+            this.p1ToPlayImage.BackColor = System.Drawing.Color.RosyBrown;
+            this.p1ToPlayImage.BackgroundImage = global::O_Natashao.Properties.Resources.toplay;
+            this.p1ToPlayImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.p1ToPlayImage.Location = new System.Drawing.Point(126, 564);
+            this.p1ToPlayImage.Name = "p1ToPlayImage";
+            this.p1ToPlayImage.Size = new System.Drawing.Size(141, 34);
+            this.p1ToPlayImage.TabIndex = 12;
+            this.p1ToPlayImage.TabStop = false;
+            // 
+            // p2CounterImage
+            // 
+            this.p2CounterImage.BackColor = System.Drawing.Color.Transparent;
+            this.p2CounterImage.BackgroundImage = global::O_Natashao.Properties.Resources._0;
+            this.p2CounterImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.p2CounterImage.Location = new System.Drawing.Point(408, 590);
+            this.p2CounterImage.Name = "p2CounterImage";
+            this.p2CounterImage.Size = new System.Drawing.Size(32, 31);
+            this.p2CounterImage.TabIndex = 6;
+            this.p2CounterImage.TabStop = false;
+            // 
+            // p1CounterImage
+            // 
+            this.p1CounterImage.BackColor = System.Drawing.Color.Transparent;
+            this.p1CounterImage.BackgroundImage = global::O_Natashao.Properties.Resources._1;
+            this.p1CounterImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.p1CounterImage.Location = new System.Drawing.Point(89, 590);
+            this.p1CounterImage.Name = "p1CounterImage";
+            this.p1CounterImage.Size = new System.Drawing.Size(31, 31);
+            this.p1CounterImage.TabIndex = 5;
+            this.p1CounterImage.TabStop = false;
+            // 
+            // playersInfoBox
+            // 
+            this.playersInfoBox.BackColor = System.Drawing.Color.RosyBrown;
+            this.playersInfoBox.Location = new System.Drawing.Point(18, 561);
+            this.playersInfoBox.Name = "playersInfoBox";
+            this.playersInfoBox.Size = new System.Drawing.Size(632, 74);
+            this.playersInfoBox.TabIndex = 2;
+            this.playersInfoBox.TabStop = false;
+            // 
+            // p2ToPlayImage
+            // 
+            this.p2ToPlayImage.BackColor = System.Drawing.Color.RosyBrown;
+            this.p2ToPlayImage.BackgroundImage = global::O_Natashao.Properties.Resources.toplay;
+            this.p2ToPlayImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.p2ToPlayImage.Location = new System.Drawing.Point(446, 564);
+            this.p2ToPlayImage.Name = "p2ToPlayImage";
+            this.p2ToPlayImage.Size = new System.Drawing.Size(141, 34);
+            this.p2ToPlayImage.TabIndex = 13;
+            this.p2ToPlayImage.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MistyRose;
             this.ClientSize = new System.Drawing.Size(662, 647);
+            this.Controls.Add(this.p2ToPlayImage);
+            this.Controls.Add(this.p1ToPlayImage);
             this.Controls.Add(this.p2CountersRemaingLabel);
             this.Controls.Add(this.p2XLabel);
             this.Controls.Add(this.p1CountersRemaingLabel);
@@ -206,12 +234,14 @@ namespace O_Natashao
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "O\'Natasha-o";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.p1ToPlayImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p2CounterImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1CounterImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.playersInfoBox)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.p2ToPlayImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,6 +264,8 @@ namespace O_Natashao
         private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.PictureBox p1ToPlayImage;
+        private System.Windows.Forms.PictureBox p2ToPlayImage;
     }
 }
 
