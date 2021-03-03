@@ -21,9 +21,6 @@ namespace O_Natashao
             InitializeComponent();
 
             newGame();
-
-            // this shows the GUI board when the form opens
-            showGUI();
         }
 
         // here we create the checker board object
@@ -36,28 +33,47 @@ namespace O_Natashao
         // p1 | TRUE | white
         // p2 | FALSE | black
         bool currentPlayer;
+        int playerToken;
 
-        private bool currentPlayerSettings(int player)
+        private bool currentPlayerSettings(bool player)
         {
-            if (player == 1)
+            if (player == true)
             {
                 currentPlayer = true;
+                playerToken = 1;
                 p1ToPlayImage.Visible = true;
                 p2ToPlayImage.Visible = false;
             }
-            else if (player == 0)
+            else if (player == false)
             {
                 currentPlayer = false;
+                playerToken = 0;
                 p1ToPlayImage.Visible = false;
                 p2ToPlayImage.Visible = true;
             }
             return currentPlayer;
         }
 
+        private void swapPlayer(bool justPlayed)
+        {
+            if (justPlayed == true)
+            {
+                currentPlayerSettings(false);
+            }
+            else if (justPlayed == false)
+            {
+                currentPlayerSettings(true);
+            }
+        }
+
         private void newGame()
         {
             startingBoard();
-            currentPlayerSettings(1);
+            currentPlayerSettings(true);
+            scoreCounter();
+
+            // this shows the GUI board when the form opens
+            showGUI();
         }
 
         // this creates an infinate board to test
@@ -154,6 +170,11 @@ namespace O_Natashao
             }
         }
 
+        private void placeToken(int row, int col)
+        {
+            checkerBoard[row, col] = playerToken;
+        }
+
         private void showGUI()
         {
             string path = Directory.GetCurrentDirectory() + "\\images\\";
@@ -181,7 +202,11 @@ namespace O_Natashao
             }
             else if (legalMove == true)
             {
+                placeToken(row, col);
                 // badger 
+                GCheckerBoard.UpDateImages(checkerBoard);
+                scoreCounter();
+                swapPlayer(currentPlayer);
             }
         }
 
