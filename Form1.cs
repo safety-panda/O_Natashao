@@ -34,6 +34,7 @@ namespace O_Natashao
         // p2 | FALSE | black
         bool currentPlayer;
         int playerToken;
+        int opponentToken;
 
         private bool currentPlayerSettings(bool player)
         {
@@ -41,6 +42,7 @@ namespace O_Natashao
             {
                 currentPlayer = true;
                 playerToken = 1;
+                opponentToken = 0;
                 p1ToPlayImage.Visible = true;
                 p2ToPlayImage.Visible = false;
             }
@@ -48,6 +50,7 @@ namespace O_Natashao
             {
                 currentPlayer = false;
                 playerToken = 0;
+                opponentToken = 1;
                 p1ToPlayImage.Visible = false;
                 p2ToPlayImage.Visible = true;
             }
@@ -158,6 +161,26 @@ namespace O_Natashao
 
         }
 
+        private bool legalMoveChecker(int row, int col)
+        {
+            bool legalMove;
+            
+            if (availableSpace(row, col) == false)
+            {
+                MessageBox.Show("Nope - not there" + Environment.NewLine + "This space is not available");
+                legalMove = false;
+            }
+            else if ((nextToOpponent(row, col) == false))
+            {
+                MessageBox.Show("Nope - not there" + Environment.NewLine + "This space is not next to your opponent");
+                legalMove = false;
+            }
+            else
+            {
+                legalMove = true;
+            }
+        }
+
         private bool availableSpace(int row, int col)
         {
             if (checkerBoard[row, col] == 10)
@@ -170,9 +193,164 @@ namespace O_Natashao
             }
         }
 
+        private bool nextToOpponent(int row, int col)
+        {
+            if ((oppN(row, col) == true) || (oppNE(row, col) == true) || (oppE(row, col) == true) || (oppSE(row, col) == true) || (oppS(row, col) == true) || (oppSW(row, col) == true) || (oppW(row, col) == true) || (oppNW(row, col) == true))
+            {
+                return true;
+            }
+            else
+            { 
+                return false;
+            }
+        }
+
+        private bool oppN(int row, int col)
+        {
+            // this func checks if the tile above is the opponent
+            try
+            {
+                if (checkerBoard[row - 1, col] == opponentToken)
+                    return true;
+                else
+                    return false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                //if the above is out of the board it returns false
+                return false;
+            }
+        }
+
+        private bool oppNE(int row, int col)
+        {
+            // this func checks if the tile above/right is the opponent
+            try
+            {
+                if (checkerBoard[row - 1, col + 1] == opponentToken)
+                    return true;
+                else
+                    return false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                //if the above/right is out of the board it returns false
+                return false;
+            }
+        }
+
+        private bool oppE(int row, int col)
+        {
+            // this func checks if the tile to the right is the opponent
+            try
+            {
+                if (checkerBoard[row, col + 1] == opponentToken)
+                    return true;
+                else
+                    return false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                //if the right is out of the board it returns false
+                return false;
+            }
+        }
+
+        private bool oppSE(int row, int col)
+        {
+            // this func checks if the tile to the below/right is the opponent
+            try
+            {
+                if (checkerBoard[row + 1, col + 1] == opponentToken)
+                    return true;
+                else
+                    return false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                //if the below/right is out of the board it returns false
+                return false;
+            }
+        }
+
+        private bool oppS(int row, int col)
+        {
+            // this func checks if the tile below is the opponent
+            try
+            {
+                if (checkerBoard[row + 1, col] == opponentToken)
+                    return true;
+                else
+                    return false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                //if the below is out of the board it returns false
+                return false;
+            }
+        }
+
+        private bool oppSW(int row, int col)
+        {
+            // this func checks if the tile below/left is the opponent
+            try
+            {
+                if (checkerBoard[row + 1, col - 1] == opponentToken)
+                    return true;
+                else
+                    return false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                //if the below/left is out of the board it returns false
+                return false;
+            }
+        }
+
+        private bool oppW(int row, int col)
+        {
+            // this func checks if the tile to the left is the opponent
+            try
+            {
+                if (checkerBoard[row, col - 1] == opponentToken)
+                    return true;
+                else
+                    return false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                //if the left is out of the board it returns false
+                return false;
+            }
+        }
+
+        private bool oppNW(int row, int col)
+        {
+            // this func checks if the tile to the above/left is the opponent
+            try
+            {
+                if (checkerBoard[row - 1, col - 1] == opponentToken)
+                    return true;
+                else
+                    return false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                //if the above/left is out of the board it returns false
+                return false;
+            }
+        }
+
+
+
         private void placeToken(int row, int col)
         {
             checkerBoard[row, col] = playerToken;
+        }
+
+        private void changeTokens(int row, int col)
+        { 
+            // badger
         }
 
         private void showGUI()
@@ -192,17 +370,13 @@ namespace O_Natashao
         {
             int row = GCheckerBoard.Get_Row(sender);
             int col = GCheckerBoard.Get_Col(sender);
-            bool legalMove;
 
-            legalMove = availableSpace(row, col);
+            bool legalMove = legalMoveChecker(row, col);
 
-            if (legalMove == false)
-            {
-                MessageBox.Show("Nope - not there");
-            }
-            else if (legalMove == true)
+            if (legalMove == true)
             {
                 placeToken(row, col);
+                changeTokens(row, col);
                 // badger 
                 GCheckerBoard.UpDateImages(checkerBoard);
                 scoreCounter();
