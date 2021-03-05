@@ -36,6 +36,61 @@ namespace O_Natashao
         int playerToken;
         int opponentToken;
 
+        private void showGUI()
+        {
+            string path = Directory.GetCurrentDirectory() + "\\images\\";
+
+
+            //infinateBoard();
+
+            scoreCounter();
+
+            GCheckerBoard = new GImageArray(this, checkerBoard, 50, 50, 100, 50, 0, path);
+            GCheckerBoard.Which_Element_Clicked += new GImageArray.ImageClickedEventHandler(Which_Element_Clicked);
+        }
+
+        private void Which_Element_Clicked(object sender, EventArgs e)
+        {
+            int row = GCheckerBoard.Get_Row(sender);
+            int col = GCheckerBoard.Get_Col(sender);
+
+            //bool legalMove = legalMoveChecker(row, col);
+
+            if (availableSpace(row, col) == true)
+            {
+                if (nextToOpponent(row, col) == true)
+                {
+                    bool flank;
+
+                    bool flankN = checkNorth(row, col);
+
+                    flank = flankN;
+
+                    if (flank == true)
+                    {
+                        placeToken(row, col);
+                        scoreCounter();
+                        swapPlayer(currentPlayer);
+                        GCheckerBoard.UpDateImages(checkerBoard);
+                        flank = false;
+                    }
+                    else 
+                    {
+                        MessageBox.Show("Nope - not there" + Environment.NewLine + "You must flank your opponent");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Nope - not there" + Environment.NewLine + "This space is not next to your opponent");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Nope - not there" + Environment.NewLine + "This space is not available");
+            }
+        }
+
         private bool currentPlayerSettings(bool player)
         {
             if (player == true)
@@ -161,25 +216,6 @@ namespace O_Natashao
 
         }
 
-        private bool legalMoveChecker(int row, int col)
-        {
-            bool legalMove;
-            
-            if (availableSpace(row, col) == false)
-            {
-                MessageBox.Show("Nope - not there" + Environment.NewLine + "This space is not available");
-                legalMove = false;
-            }
-            else if ((nextToOpponent(row, col) == false))
-            {
-                MessageBox.Show("Nope - not there" + Environment.NewLine + "This space is not next to your opponent");
-                legalMove = false;
-            }
-            else
-            {
-                legalMove = true;
-            }
-        }
 
         private bool availableSpace(int row, int col)
         {
@@ -341,48 +377,68 @@ namespace O_Natashao
             }
         }
 
+        //private bool doesItFlank(int row, int col)
+        //{
+        //    bool flank = false;
 
+        //    bool flankN = checkNorth(row, col);
+        //    //badger
+        //    //run the directional checks and they return TRUE if it does flank 
+        //    //or FALSE if it does not flank
+
+        //    if (flankN == true)
+        //        flank = true;
+
+        //    return flank;
+        //}
+
+        private bool checkNorth(int row, int col)
+        {
+            bool flankNorth;
+            int newRow = row - 1;
+
+            // lists for the tokens to flip
+            List<int> listRow = new List<int>();
+            List<int> listCol = new List<int>();
+
+            while ((checkerBoard[newRow, col] != playerToken))
+            {
+                if ((checkerBoard[newRow, col] > -1) && (checkerBoard[newRow, col] != 10))
+                {
+                    listRow.Add(newRow);
+                    listCol.Add(col);
+                    newRow--;
+                }
+                else
+                {
+                    listRow.Clear();
+                    listCol.Clear();
+                    break;
+                }
+            }
+
+
+            if (listRow.Count > 0)
+            {
+                for (int i = 0; i < listRow.Count; i++)
+                {
+                    placeToken(listRow[i], listCol[i]);
+                }
+                placeToken(row, col);
+                flankNorth = true;
+            }
+            else
+                flankNorth = false;
+
+            return flankNorth;
+        }
 
         private void placeToken(int row, int col)
         {
             checkerBoard[row, col] = playerToken;
+            
         }
 
-        private void changeTokens(int row, int col)
-        { 
-            // badger
-        }
-
-        private void showGUI()
-        {
-            string path = Directory.GetCurrentDirectory() + "\\images\\";
-
-
-            //infinateBoard();
-
-            scoreCounter();
-
-            GCheckerBoard = new GImageArray(this, checkerBoard, 50, 50, 100, 50, 0, path);
-            GCheckerBoard.Which_Element_Clicked += new GImageArray.ImageClickedEventHandler(Which_Element_Clicked);
-        }
-
-        private void Which_Element_Clicked(object sender, EventArgs e)
-        {
-            int row = GCheckerBoard.Get_Row(sender);
-            int col = GCheckerBoard.Get_Col(sender);
-
-            bool legalMove = legalMoveChecker(row, col);
-
-            if (legalMove == true)
-            {
-                placeToken(row, col);
-                changeTokens(row, col);
-                // badger 
-                GCheckerBoard.UpDateImages(checkerBoard);
-                scoreCounter();
-                swapPlayer(currentPlayer);
-            }
-        }
 
 
         // this button outputs the array values into a text box
