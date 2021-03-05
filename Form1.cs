@@ -61,13 +61,18 @@ namespace O_Natashao
             {
                 if (nextToOpponent(row, col) == true)
                 {
+                    // this is a flank validator
+                    // it checks the directional flanks
+                    // if any of then are true the play can go ahead
                     bool flank = false;
 
                     bool flankN = checkNorth(row, col);
+                    bool flankNE = checkNE(row, col);
                     bool flankE = checkEast(row, col);
                     bool flankS = checkSouth(row, col);
+                    bool flankW = checkWest(row, col);
 
-                    if (flankN == true || flankS == true || flankE == true)
+                    if (flankN == true || flankNE == true || flankE == true || flankS == true || flankW == true)
                         flank = true;
 
                     if (flank == true)
@@ -390,20 +395,9 @@ namespace O_Natashao
             }
         }
 
-        //private bool doesItFlank(int row, int col)
-        //{
-        //    bool flank = false;
 
-        //    bool flankN = checkNorth(row, col);
-        //    //badger
-        //    //run the directional checks and they return TRUE if it does flank 
-        //    //or FALSE if it does not flank
-
-        //    if (flankN == true)
-        //        flank = true;
-
-        //    return flank;
-        //}
+// here are directional checks for flanking
+// each function contains the logic to flip flanked tokens
 
         private bool checkNorth(int row, int col)
         {
@@ -414,9 +408,9 @@ namespace O_Natashao
             List<int> listRow = new List<int>();
             List<int> listCol = new List<int>();
 
-            while ((checkerBoard[newRow, col] != playerToken))
+            while ((newRow > -1) && (checkerBoard[newRow, col] != playerToken))
             {
-                if ((newRow > -1) && (checkerBoard[newRow, col] != 10))
+                if (checkerBoard[newRow, col] != 10)
                 {
                     listRow.Add(newRow);
                     listCol.Add(col);
@@ -446,6 +440,49 @@ namespace O_Natashao
             return flankNorth;
         }
 
+        private bool checkNE(int row, int col)
+        {
+            bool flankNE;
+            int newRow = row - 1;
+            int newCol = col + 1;
+
+            // lists for the tokens to flip
+            List<int> listRow = new List<int>();
+            List<int> listCol = new List<int>();
+
+            while (((newRow > -1) && (newCol < 8)) && (checkerBoard[newRow, newCol] != playerToken))
+            {
+                if (checkerBoard[newRow, newCol] != 10)
+                {
+                    listRow.Add(newRow);
+                    listCol.Add(newCol);
+                    newRow--;
+                    newCol++;
+                }
+                else
+                {
+                    listRow.Clear();
+                    listCol.Clear();
+                    break;
+                }
+            }
+
+
+            if (listRow.Count > 0)
+            {
+                for (int i = 0; i < listRow.Count; i++)
+                {
+                    placeToken(listRow[i], listCol[i]);
+                }
+                placeToken(row, col);
+                flankNE = true;
+            }
+            else
+                flankNE = false;
+
+            return flankNE;
+        }
+
         private bool checkEast(int row, int col)
         {
             bool flankEast;
@@ -455,9 +492,9 @@ namespace O_Natashao
             List<int> listRow = new List<int>();
             List<int> listCol = new List<int>();
 
-            while ((checkerBoard[row, newCol] != playerToken))
+            while ((newCol < 8) && (checkerBoard[row, newCol] != playerToken))
             {
-                if ((newCol < 9) && (checkerBoard[row, newCol] != 10))
+                if (checkerBoard[row, newCol] != 10)
                 {
                     listRow.Add(row);
                     listCol.Add(newCol);
@@ -496,9 +533,9 @@ namespace O_Natashao
             List<int> listRow = new List<int>();
             List<int> listCol = new List<int>();
 
-            while ((checkerBoard[newRow, col] != playerToken))
+            while ((newRow < 8) && (checkerBoard[newRow, col] != playerToken))
             {
-                if ((newRow < 9) && (checkerBoard[newRow, col] != 10))
+                if (checkerBoard[newRow, col] != 10)
                 {
                     listRow.Add(newRow);
                     listCol.Add(col);
@@ -538,9 +575,9 @@ namespace O_Natashao
             List<int> listRow = new List<int>();
             List<int> listCol = new List<int>();
 
-            while ((checkerBoard[row, newCol] != playerToken))
+            while ((newCol > -1) && (checkerBoard[row, newCol] != playerToken))
             {
-                if ((newCol > -1) && (checkerBoard[row, newCol] != 10))
+                if (checkerBoard[row, newCol] != 10)
                 {
                     listRow.Add(row);
                     listCol.Add(newCol);
