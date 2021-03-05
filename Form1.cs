@@ -451,7 +451,7 @@ namespace O_Natashao
                 {
                     listRow.Add(newRow);
                     listCol.Add(col);
-                    newRow--;
+                    newRow++;
                 }
                 else
                 {
