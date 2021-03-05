@@ -20,6 +20,9 @@ namespace O_Natashao
         {
             InitializeComponent();
 
+            // this shows the GUI board when the form opens
+            showGUI();
+
             newGame();
         }
 
@@ -43,7 +46,7 @@ namespace O_Natashao
 
             //infinateBoard();
 
-            scoreCounter();
+            //scoreCounter();
 
             GCheckerBoard = new GImageArray(this, checkerBoard, 50, 50, 100, 50, 0, path);
             GCheckerBoard.Which_Element_Clicked += new GImageArray.ImageClickedEventHandler(Which_Element_Clicked);
@@ -54,17 +57,17 @@ namespace O_Natashao
             int row = GCheckerBoard.Get_Row(sender);
             int col = GCheckerBoard.Get_Col(sender);
 
-            //bool legalMove = legalMoveChecker(row, col);
-
             if (availableSpace(row, col) == true)
             {
                 if (nextToOpponent(row, col) == true)
                 {
-                    bool flank;
+                    bool flank = false;
 
                     bool flankN = checkNorth(row, col);
+                    bool flankS = checkSouth(row, col);
 
-                    flank = flankN;
+                    if (flankN == true || flankS == true)
+                        flank = true;
 
                     if (flank == true)
                     {
@@ -126,12 +129,10 @@ namespace O_Natashao
 
         private void newGame()
         {
+            currentPlayerSettings(true);            
             startingBoard();
-            currentPlayerSettings(true);
             scoreCounter();
-
-            // this shows the GUI board when the form opens
-            showGUI();
+            GCheckerBoard.UpDateImages(checkerBoard);
         }
 
         // this creates an infinate board to test
@@ -161,6 +162,7 @@ namespace O_Natashao
 
         private int[,] startingBoard()
         {
+            
             for (int row = 0; row <= 7; row++)
             {
                 for (int col = 0; col <= 7; col++)
@@ -433,6 +435,48 @@ namespace O_Natashao
             return flankNorth;
         }
 
+
+        private bool checkSouth(int row, int col)
+        {
+            bool flankSouth;
+            int newRow = row + 1;
+
+            // lists for the tokens to flip
+            List<int> listRow = new List<int>();
+            List<int> listCol = new List<int>();
+
+            while ((checkerBoard[newRow, col] != playerToken))
+            {
+                if ((checkerBoard[newRow, col] > -1) && (checkerBoard[newRow, col] != 10))
+                {
+                    listRow.Add(newRow);
+                    listCol.Add(col);
+                    newRow--;
+                }
+                else
+                {
+                    listRow.Clear();
+                    listCol.Clear();
+                    break;
+                }
+            }
+
+
+            if (listRow.Count > 0)
+            {
+                for (int i = 0; i < listRow.Count; i++)
+                {
+                    placeToken(listRow[i], listCol[i]);
+                }
+                placeToken(row, col);
+                flankSouth = true;
+            }
+            else
+                flankSouth = false;
+
+            return flankSouth;
+        }
+
         private void placeToken(int row, int col)
         {
             checkerBoard[row, col] = playerToken;
@@ -444,7 +488,8 @@ namespace O_Natashao
         // this button outputs the array values into a text box
         private void button1_Click(object sender, EventArgs e)
         {
-        //    infinateBoard();
+            //    infinateBoard();
+            
 
             for (int row = 0; row <= 7; row++)
             {
@@ -457,12 +502,26 @@ namespace O_Natashao
                         else
                             checkerBoardText.AppendText("1");
                     }
-                    else
-                    { 
+                    else if (checkerBoard[row, col] == 0)
+                    {
                         if (col == 7)
                             checkerBoardText.AppendText("0" + Environment.NewLine);
                         else
                             checkerBoardText.AppendText("0");
+                    }
+                    else if (checkerBoard[row, col] == 10)
+                    {
+                        if (col == 7)
+                            checkerBoardText.AppendText("X" + Environment.NewLine);
+                        else
+                            checkerBoardText.AppendText("X");
+                    }
+                    else
+                    {
+                        if (col == 7)
+                            checkerBoardText.AppendText("?" + Environment.NewLine);
+                        else
+                            checkerBoardText.AppendText("?");
                     }
                 }
             }
