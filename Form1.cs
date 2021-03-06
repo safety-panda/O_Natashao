@@ -69,10 +69,13 @@ namespace O_Natashao
                     bool flankN = checkNorth(row, col);
                     bool flankNE = checkNE(row, col);
                     bool flankE = checkEast(row, col);
+                    bool flankSE = checkSE(row, col);
                     bool flankS = checkSouth(row, col);
+                    bool flankSW = checkSW(row, col);
                     bool flankW = checkWest(row, col);
+                    bool flankNW = checkNW(row, col);
 
-                    if (flankN == true || flankNE == true || flankE == true || flankS == true || flankW == true)
+                    if (flankN == true || flankNE == true || flankE == true || flankSE == true || flankS == true || flankSW == true || flankW == true || flankNW == true)
                         flank = true;
 
                     if (flank == true)
@@ -524,6 +527,49 @@ namespace O_Natashao
             return flankEast;
         }
 
+        private bool checkSE(int row, int col)
+        {
+            bool flankSE;
+            int newRow = row + 1;
+            int newCol = col + 1;
+
+            // lists for the tokens to flip
+            List<int> listRow = new List<int>();
+            List<int> listCol = new List<int>();
+
+            while (((newRow < 8) && (newCol < 8)) && (checkerBoard[newRow, newCol] != playerToken))
+            {
+                if (checkerBoard[newRow, newCol] != 10)
+                {
+                    listRow.Add(newRow);
+                    listCol.Add(newCol);
+                    newRow++;
+                    newCol++;
+                }
+                else
+                {
+                    listRow.Clear();
+                    listCol.Clear();
+                    break;
+                }
+            }
+
+
+            if (listRow.Count > 0)
+            {
+                for (int i = 0; i < listRow.Count; i++)
+                {
+                    placeToken(listRow[i], listCol[i]);
+                }
+                placeToken(row, col);
+                flankSE = true;
+            }
+            else
+                flankSE = false;
+
+            return flankSE;
+        }
+
         private bool checkSouth(int row, int col)
         {
             bool flankSouth;
@@ -565,6 +611,48 @@ namespace O_Natashao
             return flankSouth;
         }
 
+        private bool checkSW(int row, int col)
+        {
+            bool flankSW;
+            int newRow = row + 1;
+            int newCol = col - 1;
+
+            // lists for the tokens to flip
+            List<int> listRow = new List<int>();
+            List<int> listCol = new List<int>();
+
+            while (((newRow < 8) && (newCol > -1)) && (checkerBoard[newRow, newCol] != playerToken))
+            {
+                if (checkerBoard[newRow, newCol] != 10)
+                {
+                    listRow.Add(newRow);
+                    listCol.Add(newCol);
+                    newRow++;
+                    newCol--;
+                }
+                else
+                {
+                    listRow.Clear();
+                    listCol.Clear();
+                    break;
+                }
+            }
+
+
+            if (listRow.Count > 0)
+            {
+                for (int i = 0; i < listRow.Count; i++)
+                {
+                    placeToken(listRow[i], listCol[i]);
+                }
+                placeToken(row, col);
+                flankSW = true;
+            }
+            else
+                flankSW = false;
+
+            return flankSW;
+        }
 
         private bool checkWest(int row, int col)
         {
@@ -606,6 +694,50 @@ namespace O_Natashao
 
             return flankWest;
         }
+
+        private bool checkNW(int row, int col)
+        {
+            bool flankNW;
+            int newRow = row - 1;
+            int newCol = col - 1;
+
+            // lists for the tokens to flip
+            List<int> listRow = new List<int>();
+            List<int> listCol = new List<int>();
+
+            while (((newRow > -1) && (newCol > -1)) && (checkerBoard[newRow, newCol] != playerToken))
+            {
+                if (checkerBoard[newRow, newCol] != 10)
+                {
+                    listRow.Add(newRow);
+                    listCol.Add(newCol);
+                    newRow--;
+                    newCol--;
+                }
+                else
+                {
+                    listRow.Clear();
+                    listCol.Clear();
+                    break;
+                }
+            }
+
+
+            if (listRow.Count > 0)
+            {
+                for (int i = 0; i < listRow.Count; i++)
+                {
+                    placeToken(listRow[i], listCol[i]);
+                }
+                placeToken(row, col);
+                flankNW = true;
+            }
+            else
+                flankNW = false;
+
+            return flankNW;
+        }
+
 
         // fucntion to place player token in given space
         private void placeToken(int row, int col)
