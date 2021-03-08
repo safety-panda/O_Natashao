@@ -82,6 +82,7 @@ namespace O_Natashao
             // 
             this.p1NameBox.Location = new System.Drawing.Point(126, 601);
             this.p1NameBox.Name = "p1NameBox";
+            this.p1NameBox.ReadOnly = true;
             this.p1NameBox.Size = new System.Drawing.Size(141, 20);
             this.p1NameBox.TabIndex = 3;
             this.p1NameBox.Text = "Player One";
@@ -91,6 +92,7 @@ namespace O_Natashao
             // 
             this.p2NameBox.Location = new System.Drawing.Point(446, 601);
             this.p2NameBox.Name = "p2NameBox";
+            this.p2NameBox.ReadOnly = true;
             this.p2NameBox.Size = new System.Drawing.Size(142, 20);
             this.p2NameBox.TabIndex = 4;
             this.p2NameBox.Text = "Player Two";

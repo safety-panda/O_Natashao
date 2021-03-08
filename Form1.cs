@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using System.IO;
 
 using GUIImageArray;
+using MyDialogs;
+
 
 namespace O_Natashao
 {
@@ -38,6 +40,8 @@ namespace O_Natashao
         bool currentPlayer;
         int playerToken;
         int opponentToken;
+
+        
 
         private void showGUI()
         {
@@ -138,10 +142,19 @@ namespace O_Natashao
 
         private void newGame()
         {
+            // sets up the board for 
             currentPlayerSettings(true);
             startingBoard();
             scoreCounter();
             GCheckerBoard.UpDateImages(checkerBoard);
+
+            // default values for player name input boxes
+            string defP1 = "Player One", defP2 = "Player Two";
+
+
+            // get the user to enter the player names
+            p1NameBox.Text = My_Dialogs.InputBox("Player One Name", "Enter the name of player one:", ref defP1);
+            p2NameBox.Text = My_Dialogs.InputBox("Player Two Name", "Enter the name of player two:", ref defP2);
         }
 
         private void saveGame()
