@@ -86,7 +86,7 @@ namespace O_Natashao
                         GCheckerBoard.UpDateImages(checkerBoard);
                         flank = false;
                     }
-                    else 
+                    else
                     {
                         MessageBox.Show("Nope - not there" + Environment.NewLine + "You must flank your opponent");
                     }
@@ -138,9 +138,94 @@ namespace O_Natashao
 
         private void newGame()
         {
-            currentPlayerSettings(true);            
+            currentPlayerSettings(true);
             startingBoard();
             scoreCounter();
+            GCheckerBoard.UpDateImages(checkerBoard);
+        }
+
+        private void saveGame()
+        {
+            string applicatonPath = Directory.GetCurrentDirectory() + "\\";
+
+            StreamWriter gameOutputStream = File.CreateText(applicatonPath + "MyFile.txt");
+
+            // this function writes the checkerboard to a textbox
+            currentBoard();
+
+            // first the file saves the player names
+            gameOutputStream.WriteLine(p1NameBox.Text);
+            gameOutputStream.WriteLine(p2NameBox.Text);
+
+            // then it saves whose go it is
+            // this is a boolean so it it converted to string
+            gameOutputStream.WriteLine(currentPlayer.ToString());
+
+            // then it saves the array from the textbox
+            gameOutputStream.Write(checkerBoardText.Text);
+
+            // then the file is closed
+            gameOutputStream.Close();
+        }
+
+        private void loadGame()
+        {
+            string lineOfText;
+            string applicatonPath = Directory.GetCurrentDirectory() + "\\";
+            string[] loadRow = new string[8];
+            int rowIndex = 0;
+
+            StreamReader gameInputStream = File.OpenText(applicatonPath + "MyFile.txt");
+
+            //playerline.text.inputsteamreadline();
+            //playertwo.text.input.readlien
+            //current plau
+
+            // when reading the file the player names are read first
+            p1NameBox.Text = gameInputStream.ReadLine();
+            p2NameBox.Text = gameInputStream.ReadLine();
+
+            // reads whose turn it is
+            // this variable is boolean to the string is converted
+            currentPlayer = Convert.ToBoolean(gameInputStream.ReadLine());
+
+            // finally the rest of the file reads to populate the checkerboard array
+            lineOfText = gameInputStream.ReadLine();
+            while (lineOfText != null)
+            {
+                // for loop populates the row list
+                loadRow = lineOfText.Split(',');
+
+                //for (int i = 0; i > 7; i++)
+                //{
+                //    loadRow.Add(lineOfText[i]);
+                //}
+
+                // loops through the list and adds values to the array
+                for (int col = 0; col <= 7; col++)
+                {
+                    checkerBoard[rowIndex, col] = Convert.ToInt32(loadRow[col]);
+                }
+
+
+                // this moves the reader on to the next line of the array
+                lineOfText = gameInputStream.ReadLine();
+
+                // moves the row on to the next row for the next loop
+                rowIndex++;
+            }
+
+
+
+            // closes the game load
+            gameInputStream.Close();
+
+            
+            
+
+            // set up the interface
+            scoreCounter();
+            currentPlayerSettings(currentPlayer);
             GCheckerBoard.UpDateImages(checkerBoard);
         }
 
@@ -155,10 +240,10 @@ namespace O_Natashao
                         checkerBoard[row, col] = 0;
                     else
                         if (col > 0)
-                            if (checkerBoard[row, col - 1] == 1)
-                                checkerBoard[row, col] = 0;
-                            else
-                                checkerBoard[row, col] = 1;
+                        if (checkerBoard[row, col - 1] == 1)
+                            checkerBoard[row, col] = 0;
+                        else
+                            checkerBoard[row, col] = 1;
                     if (row > 0)
                         if (checkerBoard[row - 1, col] == 1)
                             checkerBoard[row, col] = 0;
@@ -171,7 +256,7 @@ namespace O_Natashao
 
         private int[,] startingBoard()
         {
-            
+
             for (int row = 0; row <= 7; row++)
             {
                 for (int col = 0; col <= 7; col++)
@@ -196,6 +281,46 @@ namespace O_Natashao
                 }
             }
             return checkerBoard;
+        }
+
+        // this function turns the array into lines of text to save
+        private void currentBoard()
+        {
+            for (int row = 0; row <= 7; row++)
+            {
+                for (int col = 0; col <= 7; col++)
+                {
+                    if (checkerBoard[row, col] == 1)
+                    {
+                        if (col == 7)
+                            checkerBoardText.AppendText("1," + Environment.NewLine);
+                        else
+                            checkerBoardText.AppendText("1,");
+                    }
+                    else if (checkerBoard[row, col] == 0)
+                    {
+                        if (col == 7)
+                            checkerBoardText.AppendText("0," + Environment.NewLine);
+                        else
+                            checkerBoardText.AppendText("0,");
+                    }
+                    else if (checkerBoard[row, col] == 10)
+                    {
+                        if (col == 7)
+                            checkerBoardText.AppendText("10," + Environment.NewLine);
+                        else
+                            checkerBoardText.AppendText("10,");
+                    }
+                    else
+                    {
+                        if (col == 7)
+                            checkerBoardText.AppendText("?" + Environment.NewLine);
+                        else
+                            checkerBoardText.AppendText("?");
+                    }
+                }
+            }
+
         }
 
         private void scoreCounter()
@@ -228,23 +353,23 @@ namespace O_Natashao
         }
 
 
-// checks the selected space is marked with a '10'
-// which indicates the space is empty / available
+        // checks the selected space is marked with a '10'
+        // which indicates the space is empty / available
         private bool availableSpace(int row, int col)
         {
             if (checkerBoard[row, col] == 10)
             {
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
         }
 
 
-// Uses the below directional checks to see if the selected space
-// is next to an opponent's token
+        // Uses the below directional checks to see if the selected space
+        // is next to an opponent's token
         private bool nextToOpponent(int row, int col)
         {
             if ((oppN(row, col) == true) || (oppNE(row, col) == true) || (oppE(row, col) == true) || (oppSE(row, col) == true) || (oppS(row, col) == true) || (oppSW(row, col) == true) || (oppW(row, col) == true) || (oppNW(row, col) == true))
@@ -252,15 +377,15 @@ namespace O_Natashao
                 return true;
             }
             else
-            { 
+            {
                 return false;
             }
         }
 
 
-// Below are directional checks to see if the selected space
-// is next to an opponenets token
-// they all catch the exception thrown by board edge
+        // Below are directional checks to see if the selected space
+        // is next to an opponenets token
+        // they all catch the exception thrown by board edge
 
         private bool oppN(int row, int col)
         {
@@ -399,8 +524,8 @@ namespace O_Natashao
         }
 
 
-// here are directional checks for flanking
-// each function contains the logic to flip flanked tokens
+        // here are directional checks for flanking
+        // each function contains the logic to flip flanked tokens
 
         private bool checkNorth(int row, int col)
         {
@@ -681,7 +806,7 @@ namespace O_Natashao
 
                     // if there is items in the list it is a flank
                     // break the loop so the tiles can be flipped
-                    else 
+                    else
                     {
                         break;
                     }
@@ -806,7 +931,7 @@ namespace O_Natashao
             return flankSouth;
         }
 
-        
+
         private bool checkSW(int row, int col)
         {
             bool flankSW;
@@ -890,7 +1015,7 @@ namespace O_Natashao
             return flankSW;
         }
 
-        
+
         private bool checkWest(int row, int col)
         {
             bool flankWest;
@@ -1059,7 +1184,7 @@ namespace O_Natashao
         private void placeToken(int row, int col)
         {
             checkerBoard[row, col] = playerToken;
-            
+
         }
 
 
@@ -1068,47 +1193,58 @@ namespace O_Natashao
         private void button1_Click(object sender, EventArgs e)
         {
             //    infinateBoard();
-            
 
-            for (int row = 0; row <= 7; row++)
-            {
-                for (int col = 0; col <= 7; col++)
-                {
-                    if (checkerBoard[row, col] == 1)
-                    {
-                        if (col == 7)
-                            checkerBoardText.AppendText("1" + Environment.NewLine);
-                        else
-                            checkerBoardText.AppendText("1");
-                    }
-                    else if (checkerBoard[row, col] == 0)
-                    {
-                        if (col == 7)
-                            checkerBoardText.AppendText("0" + Environment.NewLine);
-                        else
-                            checkerBoardText.AppendText("0");
-                    }
-                    else if (checkerBoard[row, col] == 10)
-                    {
-                        if (col == 7)
-                            checkerBoardText.AppendText("X" + Environment.NewLine);
-                        else
-                            checkerBoardText.AppendText("X");
-                    }
-                    else
-                    {
-                        if (col == 7)
-                            checkerBoardText.AppendText("?" + Environment.NewLine);
-                        else
-                            checkerBoardText.AppendText("?");
-                    }
-                }
-            }
+            // currentBoard();
+
+            //for (int row = 0; row <= 7; row++)
+            //{
+            //    for (int col = 0; col <= 7; col++)
+            //    {
+            //        if (checkerBoard[row, col] == 1)
+            //        {
+            //            if (col == 7)
+            //                checkerBoardText.AppendText("1" + Environment.NewLine);
+            //            else
+            //                checkerBoardText.AppendText("1");
+            //        }
+            //        else if (checkerBoard[row, col] == 0)
+            //        {
+            //            if (col == 7)
+            //                checkerBoardText.AppendText("0" + Environment.NewLine);
+            //            else
+            //                checkerBoardText.AppendText("0");
+            //        }
+            //        else if (checkerBoard[row, col] == 10)
+            //        {
+            //            if (col == 7)
+            //                checkerBoardText.AppendText("X" + Environment.NewLine);
+            //            else
+            //                checkerBoardText.AppendText("X");
+            //        }
+            //        else
+            //        {
+            //            if (col == 7)
+            //                checkerBoardText.AppendText("?" + Environment.NewLine);
+            //            else
+            //                checkerBoardText.AppendText("?");
+            //        }
+            //    }
+            //}
         }
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             newGame();
+        }
+
+        private void saveGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveGame();
+        }
+
+        private void restoreGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            loadGame();
         }
     }
 }
