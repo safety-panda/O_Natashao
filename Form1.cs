@@ -411,23 +411,62 @@ namespace O_Natashao
             List<int> listRow = new List<int>();
             List<int> listCol = new List<int>();
 
-            while ((newRow > -1) && (checkerBoard[newRow, col] != playerToken))
+            // this loop checks to see if the next tile is within bounds 
+            // and not the players token
+            // then it make makes a list of the opponents tiles it passes
+            // the else catches any non-flank and clears the lists
+            while (newRow > -1)
             {
-                if (checkerBoard[newRow, col] != 10)
-                {
-                    listRow.Add(newRow);
-                    listCol.Add(col);
-                    newRow--;
-                }
-                else
+                // if the new tile is empty stop the loop and clear the lists
+                if (checkerBoard[newRow, col] == 10)
                 {
                     listRow.Clear();
                     listCol.Clear();
                     break;
                 }
+
+                // options for if it is the players token
+                else if (checkerBoard[newRow, col] == playerToken)
+                {
+                    // if there is nothing in the list it is not a flank
+                    if (listRow.Count == 0)
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if there is items in the list it is a flank
+                    // break the loop so the tiles can be flipped
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                // options for if it is the opponenets token
+                if (checkerBoard[newRow, col] == opponentToken)
+                {
+                    // if it is on the edge of the board it not a flank
+                    if (newRow == 0)
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if it is not on the edge add to list and keep looping
+                    else
+                    {
+                        listRow.Add(newRow);
+                        listCol.Add(col);
+                        newRow--;
+                    }
+                }
+
             }
 
-
+            // flip tiles if the list is not empty
             if (listRow.Count > 0)
             {
                 for (int i = 0; i < listRow.Count; i++)
@@ -453,24 +492,63 @@ namespace O_Natashao
             List<int> listRow = new List<int>();
             List<int> listCol = new List<int>();
 
-            while (((newRow > -1) && (newCol < 8)) && (checkerBoard[newRow, newCol] != playerToken))
+            // this loop checks to see if the next tile is within bounds 
+            // and not the players token
+            // then it make makes a list of the opponents tiles it passes
+            // the else catches any non-flank and clears the lists
+            while ((newRow > -1) && (newCol < 8))
             {
-                if (checkerBoard[newRow, newCol] != 10)
-                {
-                    listRow.Add(newRow);
-                    listCol.Add(newCol);
-                    newRow--;
-                    newCol++;
-                }
-                else
+                // if the new tile is empty stop the loop and clear the lists
+                if (checkerBoard[newRow, newCol] == 10)
                 {
                     listRow.Clear();
                     listCol.Clear();
                     break;
                 }
+
+                // options for if it is the players token
+                else if (checkerBoard[newRow, newCol] == playerToken)
+                {
+                    // if there is nothing in the list it is not a flank
+                    if (listRow.Count == 0)
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if there is items in the list it is a flank
+                    // break the loop so the tiles can be flipped
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                // options for if it is the opponenets token
+                if (checkerBoard[newRow, newCol] == opponentToken)
+                {
+                    // if it is on the edge of the board it not a flank
+                    if ((newRow == 0) || (newCol == 7))
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if it is not on the edge add to list and keep looping
+                    else
+                    {
+                        listRow.Add(newRow);
+                        listCol.Add(newCol);
+                        newRow--;
+                        newCol++;
+                    }
+                }
+
             }
 
-
+            // flip tiles if the list is not empty
             if (listRow.Count > 0)
             {
                 for (int i = 0; i < listRow.Count; i++)
@@ -495,23 +573,62 @@ namespace O_Natashao
             List<int> listRow = new List<int>();
             List<int> listCol = new List<int>();
 
-            while ((newCol < 8) && (checkerBoard[row, newCol] != playerToken))
+            // this loop checks to see if the next tile is within bounds 
+            // and not the players token
+            // then it make makes a list of the opponents tiles it passes
+            // the else catches any non-flank and clears the lists
+            while (newCol < 8)
             {
-                if (checkerBoard[row, newCol] != 10)
-                {
-                    listRow.Add(row);
-                    listCol.Add(newCol);
-                    newCol++;
-                }
-                else
+                // if the new tile is empty stop the loop and clear the lists
+                if (checkerBoard[row, newCol] == 10)
                 {
                     listRow.Clear();
                     listCol.Clear();
                     break;
                 }
+
+                // options for if it is the players token
+                else if (checkerBoard[row, newCol] == playerToken)
+                {
+                    // if there is nothing in the list it is not a flank
+                    if (listRow.Count == 0)
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if there is items in the list it is a flank
+                    // break the loop so the tiles can be flipped
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                // options for if it is the opponenets token
+                if (checkerBoard[row, newCol] == opponentToken)
+                {
+                    // if it is on the edge of the board it not a flank
+                    if (newCol == 7)
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if it is not on the edge add to list and keep looping
+                    else
+                    {
+                        listRow.Add(row);
+                        listCol.Add(newCol);
+                        newCol++;
+                    }
+                }
+
             }
 
-
+            // if the list is not empty flip the tiles
             if (listRow.Count > 0)
             {
                 for (int i = 0; i < listRow.Count; i++)
@@ -537,21 +654,60 @@ namespace O_Natashao
             List<int> listRow = new List<int>();
             List<int> listCol = new List<int>();
 
-            while (((newRow < 8) && (newCol < 8)) && (checkerBoard[newRow, newCol] != playerToken))
+            // this loop checks to see if the next tile is within bounds 
+            // and not the players token
+            // then it make makes a list of the opponents tiles it passes
+            // the else catches any non-flank and clears the lists
+            while ((newRow < 8) && (newCol < 8))
             {
-                if (checkerBoard[newRow, newCol] != 10)
-                {
-                    listRow.Add(newRow);
-                    listCol.Add(newCol);
-                    newRow++;
-                    newCol++;
-                }
-                else
+                // if the new tile is empty stop the loop and clear the lists
+                if (checkerBoard[newRow, newCol] == 10)
                 {
                     listRow.Clear();
                     listCol.Clear();
                     break;
                 }
+
+                // options for if it is the players token
+                else if (checkerBoard[newRow, newCol] == playerToken)
+                {
+                    // if there is nothing in the list it is not a flank
+                    if (listRow.Count == 0)
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if there is items in the list it is a flank
+                    // break the loop so the tiles can be flipped
+                    else 
+                    {
+                        break;
+                    }
+                }
+
+                // options for if it is the opponenets token
+                if (checkerBoard[newRow, newCol] == opponentToken)
+                {
+                    // if it is on the edge of the board it not a flank
+                    if ((newRow == 7) || (newCol == 7))
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if it is not on the edge add to list and keep looping
+                    else
+                    {
+                        listRow.Add(newRow);
+                        listCol.Add(newCol);
+                        newRow++;
+                        newCol++;
+                    }
+                }
+
             }
 
 
@@ -579,20 +735,59 @@ namespace O_Natashao
             List<int> listRow = new List<int>();
             List<int> listCol = new List<int>();
 
-            while ((newRow < 8) && (checkerBoard[newRow, col] != playerToken))
+            // this loop checks to see if the next tile is within bounds 
+            // and not the players token
+            // then it make makes a list of the opponents tiles it passes
+            // the else catches any non-flank and clears the lists
+            while (newRow < 8)
             {
-                if (checkerBoard[newRow, col] != 10)
-                {
-                    listRow.Add(newRow);
-                    listCol.Add(col);
-                    newRow++;
-                }
-                else
+                // if the new tile is empty stop the loop and clear the lists
+                if (checkerBoard[newRow, col] == 10)
                 {
                     listRow.Clear();
                     listCol.Clear();
                     break;
                 }
+
+                // options for if it is the players token
+                else if (checkerBoard[newRow, col] == playerToken)
+                {
+                    // if there is nothing in the list it is not a flank
+                    if (listRow.Count == 0)
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if there is items in the list it is a flank
+                    // break the loop so the tiles can be flipped
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                // options for if it is the opponenets token
+                if (checkerBoard[newRow, col] == opponentToken)
+                {
+                    // if it is on the edge of the board it not a flank
+                    if (newRow == 7)
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if it is not on the edge add to list and keep looping
+                    else
+                    {
+                        listRow.Add(newRow);
+                        listCol.Add(col);
+                        newRow++;
+                    }
+                }
+
             }
 
 
@@ -611,6 +806,7 @@ namespace O_Natashao
             return flankSouth;
         }
 
+        
         private bool checkSW(int row, int col)
         {
             bool flankSW;
@@ -621,24 +817,64 @@ namespace O_Natashao
             List<int> listRow = new List<int>();
             List<int> listCol = new List<int>();
 
-            while (((newRow < 8) && (newCol > -1)) && (checkerBoard[newRow, newCol] != playerToken))
+
+            // this loop checks to see if the next tile is within bounds 
+            // and not the players token
+            // then it make makes a list of the opponents tiles it passes
+            // the else catches any non-flank and clears the lists
+            while ((newRow < 8) && (newCol > -1))
             {
-                if (checkerBoard[newRow, newCol] != 10)
-                {
-                    listRow.Add(newRow);
-                    listCol.Add(newCol);
-                    newRow++;
-                    newCol--;
-                }
-                else
+                // if the new tile is empty stop the loop and clear the lists
+                if (checkerBoard[newRow, newCol] == 10)
                 {
                     listRow.Clear();
                     listCol.Clear();
                     break;
                 }
+
+                // options for if it is the players token
+                else if (checkerBoard[newRow, newCol] == playerToken)
+                {
+                    // if there is nothing in the list it is not a flank
+                    if (listRow.Count == 0)
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if there is items in the list it is a flank
+                    // break the loop so the tiles can be flipped
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                // options for if it is the opponenets token
+                if (checkerBoard[newRow, newCol] == opponentToken)
+                {
+                    // if it is on the edge of the board it not a flank
+                    if ((newRow == 7) || (newCol == 0))
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if it is not on the edge add to list and keep looping
+                    else
+                    {
+                        listRow.Add(newRow);
+                        listCol.Add(newCol);
+                        newRow++;
+                        newCol--;
+                    }
+                }
+
             }
 
-
+            // if the list is not empty flip the tiles stored
             if (listRow.Count > 0)
             {
                 for (int i = 0; i < listRow.Count; i++)
@@ -654,6 +890,7 @@ namespace O_Natashao
             return flankSW;
         }
 
+        
         private bool checkWest(int row, int col)
         {
             bool flankWest;
@@ -663,23 +900,62 @@ namespace O_Natashao
             List<int> listRow = new List<int>();
             List<int> listCol = new List<int>();
 
-            while ((newCol > -1) && (checkerBoard[row, newCol] != playerToken))
+            // this loop checks to see if the next tile is within bounds 
+            // and not the players token
+            // then it make makes a list of the opponents tiles it passes
+            // the else catches any non-flank and clears the lists
+            while (newCol > -1)
             {
-                if (checkerBoard[row, newCol] != 10)
-                {
-                    listRow.Add(row);
-                    listCol.Add(newCol);
-                    newCol--;
-                }
-                else
+                // if the new tile is empty stop the loop and clear the lists
+                if (checkerBoard[row, newCol] == 10)
                 {
                     listRow.Clear();
                     listCol.Clear();
                     break;
                 }
+
+                // options for if it is the players token
+                else if (checkerBoard[row, newCol] == playerToken)
+                {
+                    // if there is nothing in the list it is not a flank
+                    if (listRow.Count == 0)
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if there is items in the list it is a flank
+                    // break the loop so the tiles can be flipped
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                // options for if it is the opponenets token
+                if (checkerBoard[row, newCol] == opponentToken)
+                {
+                    // if it is on the edge of the board it not a flank
+                    if (newCol == 0)
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if it is not on the edge add to list and keep looping
+                    else
+                    {
+                        listRow.Add(row);
+                        listCol.Add(newCol);
+                        newCol--;
+                    }
+                }
+
             }
 
-
+            // if the list isn't empty flip the tiles
             if (listRow.Count > 0)
             {
                 for (int i = 0; i < listRow.Count; i++)
@@ -705,24 +981,64 @@ namespace O_Natashao
             List<int> listRow = new List<int>();
             List<int> listCol = new List<int>();
 
-            while (((newRow > -1) && (newCol > -1)) && (checkerBoard[newRow, newCol] != playerToken))
+
+            // this loop checks to see if the next tile is within bounds 
+            // and not the players token
+            // then it make makes a list of the opponents tiles it passes
+            // the else catches any non-flank and clears the lists
+            while ((newRow > -1) && (newCol > -1))
             {
-                if (checkerBoard[newRow, newCol] != 10)
-                {
-                    listRow.Add(newRow);
-                    listCol.Add(newCol);
-                    newRow--;
-                    newCol--;
-                }
-                else
+                // if the new tile is empty stop the loop and clear the lists
+                if (checkerBoard[newRow, newCol] == 10)
                 {
                     listRow.Clear();
                     listCol.Clear();
                     break;
                 }
+
+                // options for if it is the players token
+                else if (checkerBoard[newRow, newCol] == playerToken)
+                {
+                    // if there is nothing in the list it is not a flank
+                    if (listRow.Count == 0)
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if there is items in the list it is a flank
+                    // break the loop so the tiles can be flipped
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                // options for if it is the opponenets token
+                if (checkerBoard[newRow, newCol] == opponentToken)
+                {
+                    // if it is on the edge of the board it not a flank
+                    if ((newRow == 0) || (newCol == 0))
+                    {
+                        listRow.Clear();
+                        listCol.Clear();
+                        break;
+                    }
+
+                    // if it is not on the edge add to list and keep looping
+                    else
+                    {
+                        listRow.Add(newRow);
+                        listCol.Add(newCol);
+                        newRow--;
+                        newCol--;
+                    }
+                }
+
             }
 
-
+            // if the list is not empty flip the tiles 
             if (listRow.Count > 0)
             {
                 for (int i = 0; i < listRow.Count; i++)
