@@ -159,26 +159,60 @@ namespace O_Natashao
 
         private void saveGame()
         {
-            string applicatonPath = Directory.GetCurrentDirectory() + "\\";
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            StreamWriter gameOutputStream = File.CreateText(applicatonPath + "MyFile.txt");
+            saveFileDialog1.Filter = "txt files (*.txt)|*.txt";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
 
-            // this function writes the checkerboard to a textbox
-            currentBoard();
 
-            // first the file saves the player names
-            gameOutputStream.WriteLine(p1NameBox.Text);
-            gameOutputStream.WriteLine(p2NameBox.Text);
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (File.Exists(saveFileDialog1.FileName)) // badger | look into this if
+                {
+                    StreamWriter gameOutputStream = File.CreateText(saveFileDialog1.FileName);
 
-            // then it saves whose go it is
-            // this is a boolean so it it converted to string
-            gameOutputStream.WriteLine(currentPlayer.ToString());
+                    // this function writes the checkerboard to a textbox
+                    currentBoard();
 
-            // then it saves the array from the textbox
-            gameOutputStream.Write(checkerBoardText.Text);
+                    // first the file saves the player names
+                    gameOutputStream.WriteLine(p1NameBox.Text);
+                    gameOutputStream.WriteLine(p2NameBox.Text);
 
-            // then the file is closed
-            gameOutputStream.Close();
+                    // then it saves whose go it is
+                    // this is a boolean so it it converted to string
+                    gameOutputStream.WriteLine(currentPlayer.ToString());
+
+                    // then it saves the array from the textbox
+                    gameOutputStream.Write(checkerBoardText.Text);
+
+                    // then the file is closed
+                    gameOutputStream.Close();
+                }
+                else
+                {
+
+                    StreamWriter gameOutputStream = File.CreateText(saveFileDialog1.FileName);
+
+                    // this function writes the checkerboard to a textbox
+                    currentBoard();
+
+                    // first the file saves the player names
+                    gameOutputStream.WriteLine(p1NameBox.Text);
+                    gameOutputStream.WriteLine(p2NameBox.Text);
+
+                    // then it saves whose go it is
+                    // this is a boolean so it it converted to string
+                    gameOutputStream.WriteLine(currentPlayer.ToString());
+
+                    // then it saves the array from the textbox
+                    gameOutputStream.Write(checkerBoardText.Text);
+
+                    // then the file is closed
+                    gameOutputStream.Close();
+
+                }
+            }
         }
 
         private void loadGame()
@@ -190,9 +224,6 @@ namespace O_Natashao
 
             StreamReader gameInputStream = File.OpenText(applicatonPath + "MyFile.txt");
 
-            //playerline.text.inputsteamreadline();
-            //playertwo.text.input.readlien
-            //current plau
 
             // when reading the file the player names are read first
             p1NameBox.Text = gameInputStream.ReadLine();
@@ -209,10 +240,6 @@ namespace O_Natashao
                 // for loop populates the row list
                 loadRow = lineOfText.Split(',');
 
-                //for (int i = 0; i > 7; i++)
-                //{
-                //    loadRow.Add(lineOfText[i]);
-                //}
 
                 // loops through the list and adds values to the array
                 for (int col = 0; col <= 7; col++)
@@ -228,13 +255,8 @@ namespace O_Natashao
                 rowIndex++;
             }
 
-
-
             // closes the game load
             gameInputStream.Close();
-
-            
-            
 
             // set up the interface
             scoreCounter();
