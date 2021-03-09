@@ -168,50 +168,30 @@ namespace O_Natashao
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                if (File.Exists(saveFileDialog1.FileName)) // badger | look into this if
-                {
-                    StreamWriter gameOutputStream = File.CreateText(saveFileDialog1.FileName);
+                StreamWriter gameOutputStream = File.CreateText(saveFileDialog1.FileName);
 
-                    // this function writes the checkerboard to a textbox
-                    currentBoard();
+                // this function writes the checkerboard to a textbox
+                currentBoard();
 
-                    // first the file saves the player names
-                    gameOutputStream.WriteLine(p1NameBox.Text);
-                    gameOutputStream.WriteLine(p2NameBox.Text);
+                // first the file saves the player names
+                gameOutputStream.WriteLine(p1NameBox.Text);
+                gameOutputStream.WriteLine(p2NameBox.Text);
 
-                    // then it saves whose go it is
-                    // this is a boolean so it it converted to string
-                    gameOutputStream.WriteLine(currentPlayer.ToString());
+                // then it saves whose go it is
+                // this is a boolean so it it converted to string
+                gameOutputStream.WriteLine(currentPlayer.ToString());
 
-                    // then it saves the array from the textbox
-                    gameOutputStream.Write(checkerBoardText.Text);
+                // then it saves the array from the textbox
+                gameOutputStream.Write(checkerBoardText.Text);
 
-                    // then the file is closed
-                    gameOutputStream.Close();
-                }
-                else
-                {
+                // then the file is closed
+                gameOutputStream.Close();
 
-                    StreamWriter gameOutputStream = File.CreateText(saveFileDialog1.FileName);
-
-                    // this function writes the checkerboard to a textbox
-                    currentBoard();
-
-                    // first the file saves the player names
-                    gameOutputStream.WriteLine(p1NameBox.Text);
-                    gameOutputStream.WriteLine(p2NameBox.Text);
-
-                    // then it saves whose go it is
-                    // this is a boolean so it it converted to string
-                    gameOutputStream.WriteLine(currentPlayer.ToString());
-
-                    // then it saves the array from the textbox
-                    gameOutputStream.Write(checkerBoardText.Text);
-
-                    // then the file is closed
-                    gameOutputStream.Close();
-
-                }
+                //}
+            }
+            else 
+            {
+                MessageBox.Show("You did not save your game", "File not saved");
             }
         }
 
@@ -224,12 +204,11 @@ namespace O_Natashao
             int rowIndex = 0;
 
             // settings for the file dialog
-            //OpenFileDialog openFileDialog1 = new openFileDialog();
-
             openFileDialog1.Filter = "txt files (*.txt)|*.txt";
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.RestoreDirectory = true;
 
+            // if the user clicks ok on a file it loads the game
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
 
