@@ -159,7 +159,7 @@ namespace O_Natashao
 
         private void saveGame()
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            // SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
             saveFileDialog1.Filter = "txt files (*.txt)|*.txt";
             saveFileDialog1.FilterIndex = 2;
@@ -217,51 +217,63 @@ namespace O_Natashao
 
         private void loadGame()
         {
+            // variables for reading the file
             string lineOfText;
             string applicatonPath = Directory.GetCurrentDirectory() + "\\";
             string[] loadRow = new string[8];
             int rowIndex = 0;
 
-            StreamReader gameInputStream = File.OpenText(applicatonPath + "MyFile.txt");
+            // settings for the file dialog
+            //OpenFileDialog openFileDialog1 = new openFileDialog();
 
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
 
-            // when reading the file the player names are read first
-            p1NameBox.Text = gameInputStream.ReadLine();
-            p2NameBox.Text = gameInputStream.ReadLine();
-
-            // reads whose turn it is
-            // this variable is boolean to the string is converted
-            currentPlayer = Convert.ToBoolean(gameInputStream.ReadLine());
-
-            // finally the rest of the file reads to populate the checkerboard array
-            lineOfText = gameInputStream.ReadLine();
-            while (lineOfText != null)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                // for loop populates the row list
-                loadRow = lineOfText.Split(',');
+
+                StreamReader gameInputStream = File.OpenText(openFileDialog1.FileName);
 
 
-                // loops through the list and adds values to the array
-                for (int col = 0; col <= 7; col++)
+                // when reading the file the player names are read first
+                p1NameBox.Text = gameInputStream.ReadLine();
+                p2NameBox.Text = gameInputStream.ReadLine();
+
+                // reads whose turn it is
+                // this variable is boolean to the string is converted
+                currentPlayer = Convert.ToBoolean(gameInputStream.ReadLine());
+
+                // finally the rest of the file reads to populate the checkerboard array
+                lineOfText = gameInputStream.ReadLine();
+                while (lineOfText != null)
                 {
-                    checkerBoard[rowIndex, col] = Convert.ToInt32(loadRow[col]);
+                    // for loop populates the row list
+                    loadRow = lineOfText.Split(',');
+
+
+                    // loops through the list and adds values to the array
+                    for (int col = 0; col <= 7; col++)
+                    {
+                        checkerBoard[rowIndex, col] = Convert.ToInt32(loadRow[col]);
+                    }
+
+
+                    // this moves the reader on to the next line of the array
+                    lineOfText = gameInputStream.ReadLine();
+
+                    // moves the row on to the next row for the next loop
+                    rowIndex++;
                 }
 
+                // closes the game load
+                gameInputStream.Close();
 
-                // this moves the reader on to the next line of the array
-                lineOfText = gameInputStream.ReadLine();
-
-                // moves the row on to the next row for the next loop
-                rowIndex++;
+                // set up the interface
+                scoreCounter();
+                currentPlayerSettings(currentPlayer);
+                GCheckerBoard.UpDateImages(checkerBoard);
             }
-
-            // closes the game load
-            gameInputStream.Close();
-
-            // set up the interface
-            scoreCounter();
-            currentPlayerSettings(currentPlayer);
-            GCheckerBoard.UpDateImages(checkerBoard);
         }
 
         // this creates an infinate board to test
