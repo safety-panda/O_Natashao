@@ -160,13 +160,27 @@ namespace O_Natashao
             
         }
 
+        private void wantToSave()
+        {
+            // this funciton has a dialog box that asks the user if they want to save the game and if so calls the saveGame function
+            DialogResult dialogResult = MessageBox.Show("Do you want to save your current game?", "Want to save?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                saveGame();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                MessageBox.Show("You game was not saved", "Game Not Saved");
+            }
+        }
+
         private void saveGame()
         {
-            // SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-
+            
             saveFileDialog1.Filter = "txt files (*.txt)|*.txt";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.FileName = "";
 
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -190,7 +204,8 @@ namespace O_Natashao
                 // then the file is closed
                 gameOutputStream.Close();
 
-                //}
+                // lets the user know the game was saved
+                MessageBox.Show("You saved your game", "File saved");
             }
             else 
             {
@@ -210,6 +225,7 @@ namespace O_Natashao
             openFileDialog1.Filter = "txt files (*.txt)|*.txt";
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.FileName = "";
 
             // if the user clicks ok on a file it loads the game
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -251,10 +267,18 @@ namespace O_Natashao
                 // closes the game load
                 gameInputStream.Close();
 
+                if (GCheckerBoard == null)
+                {
+                    showGUI();
+                }
+                else 
+                {
+                    GCheckerBoard.UpDateImages(checkerBoard);
+                }
+
                 // set up the interface
                 scoreCounter();
                 currentPlayerSettings(currentPlayer);
-                GCheckerBoard.UpDateImages(checkerBoard);
             }
         }
 
@@ -1223,6 +1247,8 @@ namespace O_Natashao
         {
             //    infinateBoard();
 
+            // wantToSave();
+
             // currentBoard();
 
             //for (int row = 0; row <= 7; row++)
@@ -1272,9 +1298,7 @@ namespace O_Natashao
             {
                 // checks if a GUI game board exists 
                 // and if it does ask the user if they want to save the game
-
-                // does user want to save current game? 
-                // diaglog box
+                wantToSave();
             }
 
             newGame();
@@ -1282,15 +1306,22 @@ namespace O_Natashao
 
         private void saveGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveGame();
+            if (GCheckerBoard == null)
+            {
+                MessageBox.Show("There is no game currently in progress", "Error: No Game");
+            }
+            else
+            {
+                saveGame();
+            }
         }
 
         private void restoreGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (GCheckerBoard != null)
-            { 
+            {
                 // does user want to save current game? 
-                // diaglog box
+                wantToSave();
             }
             loadGame();
         }
@@ -1309,11 +1340,31 @@ namespace O_Natashao
                 
         }
 
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form2 about = new Form2();
 
             about.ShowDialog();
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (GCheckerBoard != null)
+            {
+                // does user want to save current game? 
+                wantToSave();
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
+        }
+
     }
 }
