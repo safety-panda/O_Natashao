@@ -37,11 +37,6 @@ namespace O_Natashao
             this.p1CountersLabel = new System.Windows.Forms.Label();
             this.p2XLabel = new System.Windows.Forms.Label();
             this.p2CountersLabel = new System.Windows.Forms.Label();
-            this.p1ToPlayImage = new System.Windows.Forms.PictureBox();
-            this.p2CounterImage = new System.Windows.Forms.PictureBox();
-            this.p1CounterImage = new System.Windows.Forms.PictureBox();
-            this.playersInfoBox = new System.Windows.Forms.PictureBox();
-            this.p2ToPlayImage = new System.Windows.Forms.PictureBox();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,12 +48,17 @@ namespace O_Natashao
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.p2ToPlayImage = new System.Windows.Forms.PictureBox();
+            this.p1ToPlayImage = new System.Windows.Forms.PictureBox();
+            this.p2CounterImage = new System.Windows.Forms.PictureBox();
+            this.p1CounterImage = new System.Windows.Forms.PictureBox();
+            this.playersInfoBox = new System.Windows.Forms.PictureBox();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.p2ToPlayImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1ToPlayImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p2CounterImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1CounterImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.playersInfoBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.p2ToPlayImage)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkerBoardText
@@ -85,20 +85,16 @@ namespace O_Natashao
             // 
             this.p1NameBox.Location = new System.Drawing.Point(126, 601);
             this.p1NameBox.Name = "p1NameBox";
-            this.p1NameBox.ReadOnly = true;
             this.p1NameBox.Size = new System.Drawing.Size(141, 20);
             this.p1NameBox.TabIndex = 3;
-            this.p1NameBox.Text = "Player One";
             this.p1NameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // p2NameBox
             // 
             this.p2NameBox.Location = new System.Drawing.Point(446, 601);
             this.p2NameBox.Name = "p2NameBox";
-            this.p2NameBox.ReadOnly = true;
             this.p2NameBox.Size = new System.Drawing.Size(142, 20);
             this.p2NameBox.TabIndex = 4;
-            this.p2NameBox.Text = "Player Two";
             this.p2NameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // p1XLabel
@@ -140,6 +136,95 @@ namespace O_Natashao
             this.p2CountersLabel.Size = new System.Drawing.Size(41, 31);
             this.p2CountersLabel.TabIndex = 10;
             this.p2CountersLabel.Text = "2";
+            // 
+            // gameToolStripMenuItem
+            // 
+            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newGameToolStripMenuItem,
+            this.saveGameToolStripMenuItem,
+            this.restoreGameToolStripMenuItem});
+            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.gameToolStripMenuItem.Text = "Game";
+            // 
+            // newGameToolStripMenuItem
+            // 
+            this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.newGameToolStripMenuItem.Text = "New Game";
+            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
+            // 
+            // saveGameToolStripMenuItem
+            // 
+            this.saveGameToolStripMenuItem.Name = "saveGameToolStripMenuItem";
+            this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.saveGameToolStripMenuItem.Text = "Save Game";
+            this.saveGameToolStripMenuItem.Click += new System.EventHandler(this.saveGameToolStripMenuItem_Click);
+            // 
+            // restoreGameToolStripMenuItem
+            // 
+            this.restoreGameToolStripMenuItem.Name = "restoreGameToolStripMenuItem";
+            this.restoreGameToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.restoreGameToolStripMenuItem.Text = "Restore Game";
+            this.restoreGameToolStripMenuItem.Click += new System.EventHandler(this.restoreGameToolStripMenuItem_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.speakToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // speakToolStripMenuItem
+            // 
+            this.speakToolStripMenuItem.Name = "speakToolStripMenuItem";
+            this.speakToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.speakToolStripMenuItem.Text = "Speak";
+            this.speakToolStripMenuItem.Click += new System.EventHandler(this.speakToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gameToolStripMenuItem,
+            this.settingsToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(662, 24);
+            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // p2ToPlayImage
+            // 
+            this.p2ToPlayImage.BackColor = System.Drawing.Color.RosyBrown;
+            this.p2ToPlayImage.BackgroundImage = global::O_Natashao.Properties.Resources.toplay;
+            this.p2ToPlayImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.p2ToPlayImage.Location = new System.Drawing.Point(446, 564);
+            this.p2ToPlayImage.Name = "p2ToPlayImage";
+            this.p2ToPlayImage.Size = new System.Drawing.Size(141, 34);
+            this.p2ToPlayImage.TabIndex = 13;
+            this.p2ToPlayImage.TabStop = false;
+            this.p2ToPlayImage.Visible = false;
             // 
             // p1ToPlayImage
             // 
@@ -184,94 +269,6 @@ namespace O_Natashao
             this.playersInfoBox.TabIndex = 2;
             this.playersInfoBox.TabStop = false;
             // 
-            // p2ToPlayImage
-            // 
-            this.p2ToPlayImage.BackColor = System.Drawing.Color.RosyBrown;
-            this.p2ToPlayImage.BackgroundImage = global::O_Natashao.Properties.Resources.toplay;
-            this.p2ToPlayImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.p2ToPlayImage.Location = new System.Drawing.Point(446, 564);
-            this.p2ToPlayImage.Name = "p2ToPlayImage";
-            this.p2ToPlayImage.Size = new System.Drawing.Size(141, 34);
-            this.p2ToPlayImage.TabIndex = 13;
-            this.p2ToPlayImage.TabStop = false;
-            this.p2ToPlayImage.Visible = false;
-            // 
-            // gameToolStripMenuItem
-            // 
-            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newGameToolStripMenuItem,
-            this.saveGameToolStripMenuItem,
-            this.restoreGameToolStripMenuItem});
-            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
-            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.gameToolStripMenuItem.Text = "Game";
-            // 
-            // newGameToolStripMenuItem
-            // 
-            this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.newGameToolStripMenuItem.Text = "New Game";
-            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
-            // 
-            // saveGameToolStripMenuItem
-            // 
-            this.saveGameToolStripMenuItem.Name = "saveGameToolStripMenuItem";
-            this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.saveGameToolStripMenuItem.Text = "Save Game";
-            this.saveGameToolStripMenuItem.Click += new System.EventHandler(this.saveGameToolStripMenuItem_Click);
-            // 
-            // restoreGameToolStripMenuItem
-            // 
-            this.restoreGameToolStripMenuItem.Name = "restoreGameToolStripMenuItem";
-            this.restoreGameToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.restoreGameToolStripMenuItem.Text = "Restore Game";
-            this.restoreGameToolStripMenuItem.Click += new System.EventHandler(this.restoreGameToolStripMenuItem_Click);
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.speakToolStripMenuItem});
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // speakToolStripMenuItem
-            // 
-            this.speakToolStripMenuItem.Name = "speakToolStripMenuItem";
-            this.speakToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.speakToolStripMenuItem.Text = "Speak";
-            this.speakToolStripMenuItem.Click += new System.EventHandler(this.speakToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gameToolStripMenuItem,
-            this.settingsToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(662, 24);
-            this.menuStrip1.TabIndex = 11;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -296,13 +293,13 @@ namespace O_Natashao
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "O\'Natasha-o";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.p2ToPlayImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1ToPlayImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p2CounterImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1CounterImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.playersInfoBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.p2ToPlayImage)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

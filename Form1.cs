@@ -21,11 +21,6 @@ namespace O_Natashao
         public Form1()
         {
             InitializeComponent();
-
-            // this shows the GUI board when the form opens
-            showGUI();
-
-            newGame();
         }
 
         // here we create the checker board object
@@ -151,10 +146,18 @@ namespace O_Natashao
             // default values for player name input boxes
             string defP1 = "Player One", defP2 = "Player Two";
 
+            // checks if the user has input player names
+            // if not it asks for names
+            if(p1NameBox.Text == "")
+            {
+                p1NameBox.Text = My_Dialogs.InputBox("Player One Name", "Enter the name of player one:", ref defP1);
+            }
 
-            // get the user to enter the player names
-            p1NameBox.Text = My_Dialogs.InputBox("Player One Name", "Enter the name of player one:", ref defP1);
-            p2NameBox.Text = My_Dialogs.InputBox("Player Two Name", "Enter the name of player two:", ref defP2);
+            if (p2NameBox.Text == "")
+            {
+                p2NameBox.Text = My_Dialogs.InputBox("Player Two Name", "Enter the name of player two:", ref defP2);
+            }
+            
         }
 
         private void saveGame()
@@ -1260,6 +1263,20 @@ namespace O_Natashao
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (GCheckerBoard == null)
+            {
+                // this shows the GUI board if it doesn't already exist
+                showGUI();
+            }
+            else 
+            {
+                // checks if a GUI game board exists 
+                // and if it does ask the user if they want to save the game
+
+                // does user want to save current game? 
+                // diaglog box
+            }
+
             newGame();
         }
 
@@ -1270,6 +1287,11 @@ namespace O_Natashao
 
         private void restoreGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (GCheckerBoard != null)
+            { 
+                // does user want to save current game? 
+                // diaglog box
+            }
             loadGame();
         }
 
@@ -1285,6 +1307,13 @@ namespace O_Natashao
                 speakToolStripMenuItem.Checked = true;
             }
                 
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 about = new Form2();
+
+            about.ShowDialog();
         }
     }
 }
