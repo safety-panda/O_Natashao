@@ -83,6 +83,16 @@ namespace O_Natashao.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap aboutImage {
+            get {
+                object obj = ResourceManager.GetObject("aboutImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap toplay {
             get {
                 object obj = ResourceManager.GetObject("toplay", resourceCulture);
