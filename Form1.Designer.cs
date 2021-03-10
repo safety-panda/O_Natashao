@@ -52,6 +52,7 @@ namespace O_Natashao
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.p1ToPlayImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p2CounterImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1CounterImage)).BeginInit();
@@ -237,11 +238,14 @@ namespace O_Natashao
             // speakToolStripMenuItem
             // 
             this.speakToolStripMenuItem.Name = "speakToolStripMenuItem";
-            this.speakToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.speakToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.speakToolStripMenuItem.Text = "Speak";
+            this.speakToolStripMenuItem.Click += new System.EventHandler(this.speakToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -261,6 +265,12 @@ namespace O_Natashao
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Text = "About";
             // 
             // Form1
             // 
@@ -323,6 +333,7 @@ namespace O_Natashao
         private System.Windows.Forms.ToolStripMenuItem restoreGameToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

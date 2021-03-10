@@ -1272,5 +1272,19 @@ namespace O_Natashao
         {
             loadGame();
         }
+
+        // function to add user check / uncheck the menu item for speak
+        private void speakToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (speakToolStripMenuItem.Checked == true)
+            {
+                speakToolStripMenuItem.Checked = false;
+            }
+            else if (speakToolStripMenuItem.Checked == false)
+            {
+                speakToolStripMenuItem.Checked = true;
+            }
+                
+        }
     }
 }
