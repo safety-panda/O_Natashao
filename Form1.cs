@@ -43,10 +43,6 @@ namespace O_Natashao
             string path = Directory.GetCurrentDirectory() + "\\images\\";
 
 
-            //infinateBoard();
-
-            //scoreCounter();
-
             GCheckerBoard = new GImageArray(this, checkerBoard, 50, 50, 100, 50, 0, path);
             GCheckerBoard.Which_Element_Clicked += new GImageArray.ImageClickedEventHandler(Which_Element_Clicked);
         }
@@ -1315,7 +1311,6 @@ namespace O_Natashao
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form2 about = new Form2();
-
             about.ShowDialog();
         }
 
