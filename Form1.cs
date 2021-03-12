@@ -1251,40 +1251,7 @@ namespace O_Natashao
 
             // currentBoard();
 
-            //for (int row = 0; row <= 7; row++)
-            //{
-            //    for (int col = 0; col <= 7; col++)
-            //    {
-            //        if (checkerBoard[row, col] == 1)
-            //        {
-            //            if (col == 7)
-            //                checkerBoardText.AppendText("1" + Environment.NewLine);
-            //            else
-            //                checkerBoardText.AppendText("1");
-            //        }
-            //        else if (checkerBoard[row, col] == 0)
-            //        {
-            //            if (col == 7)
-            //                checkerBoardText.AppendText("0" + Environment.NewLine);
-            //            else
-            //                checkerBoardText.AppendText("0");
-            //        }
-            //        else if (checkerBoard[row, col] == 10)
-            //        {
-            //            if (col == 7)
-            //                checkerBoardText.AppendText("X" + Environment.NewLine);
-            //            else
-            //                checkerBoardText.AppendText("X");
-            //        }
-            //        else
-            //        {
-            //            if (col == 7)
-            //                checkerBoardText.AppendText("?" + Environment.NewLine);
-            //            else
-            //                checkerBoardText.AppendText("?");
-            //        }
-            //    }
-            //}
+           
         }
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
